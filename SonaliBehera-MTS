@@ -1,0 +1,136 @@
+QUESTION-1
+app.component.ts
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  
+ title='MOBILE SHOPPING';
+ productTitle:string="SAMSUNG";
+ productPrice:number=40000;
+ stock:number=5;
+ imageLocation:string='../assets/image.jpg';
+}
+
+
+
+app.component.html
+<div class="panel panel-default" style="width:900px">
+  <div class="panel-body">
+  <div class="card" style="margin-left:400px; margin-top:50px">
+    <img [src]="imageLocation" width="100%" height="50%" style="padding:15px">
+    <div class="card-body">
+      <h4>Category :{{productTitle}}</h4>
+      <h4>Price :{{productPrice}}</h4>
+      <h4>Stock :{{stock}}</h4>
+    </div>
+    <button type="button" style="width:150px;margin-left: 180px;margin-bottom: 20px; " class="btn btn-success">Add to cart</button>
+  </div>
+  </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  QUESTION-3
+  app.component.ts 
+  
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  productform:FormGroup;
+  successMessage:string;
+  failMessage:string;
+  constructor(){
+    this.productform=new FormGroup({
+      pname:new FormControl("",[Validators.required]),
+      pbrand:new FormControl("",[Validators.required]),
+      pprice:new FormControl("",[Validators.required])
+    });
+  }
+  get pname(){
+    return this.productform.get('pname');
+  }
+
+  get pbrand(){
+   return this.productform.get('pbrand');
+ }
+ get pprice(){
+  return this.productform.get('pprice');
+}
+login(){
+  alert('successfully login....');
+  console.log(this.productform.value.pname);
+  console.log(this.productform.value.pbrand);
+  console.log(this.productform.value.pprice);
+  }
+}
+
+
+app.component.html
+<hr/>
+<div class="container">
+  <div class="panel panel-primary">
+<h2 style="text-align: center;font-family: 'Courier New', Courier, monospace;font-size: 30px;background-color: blue;color:white;">PRODUCT DETAILS</h2>
+
+<div class="panel-body">
+  <form [formGroup]="productform" (ngStore)="login()">
+
+<div class="form-group">
+<label for="pname">PRODUCT NAME</label>
+<input type="email"class="form-control"id="pname" formControlName="pname">
+<small style="color:red" *ngIf="myemail.invalid && myemail.touched">*NAME IS REQUIRED</small>
+
+</div>
+
+<div class="form-group">
+  <label for="pbrand">PRODUCT BRAND </label>
+  <input type="email" class="form-control" id="pbrand" formControlName="pbrand">
+  <small style="color:red" *ngIf="myemail.invalid && myemail.touched">*BRAND IS REQUIRED</small>
+
+</div>
+
+<div class="form-group">
+  <label for="pprice">PRODUCT PRICE</label>
+  <input type="email" class="form-control" id="pprice" formControlName="pprice">
+  <small style="color:red" *ngIf="myemail.invalid && myemail.touched">*PRICE IS REQUIRED</small>
+
+</div>
+
+
+<button class="btn btn-primary" [disabled]="productform.invalid">Store</button>
+</form>
+ 
+</div>
+<div class="panel-footer">
+<table width="100%">
+<tr>
+<td>PRODUCT NAME</td>
+<td>PRODUCT BRAND</td>
+<td>PRODUCT PRICE</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<hr/>
+
+
+
+
+
+
